@@ -29,13 +29,12 @@ class Heart extends Effect {
     ],
   ];
   Duration nextFrame = Duration.zero;
-  int color = Launchpad.COLOR_BLACK;
 
   Heart(Launchpad launchpad) : super(launchpad);
 
   @override
   onInitialize() {
-    launchpad.reset();
+    launchpad.setProgrammerMode(1);
   }
 
   @override
@@ -49,7 +48,7 @@ class Heart extends Effect {
   _fill(int ms) {
     for (int y = 0; y < 8; y++) {
       for (int x = 0; x < 8; x++) {
-        final int red = max(heart[0][y][x] * 255, heart[1][y][x] * sin(ms / 4).toInt());
+        final int red = (max(heart[0][y][x].toDouble(), heart[1][y][x] * sin(ms / 4)) * 63).toInt();
         launchpad.setCellRgb(x + 1, y + 1, red, 0, 0);
       }
     }
