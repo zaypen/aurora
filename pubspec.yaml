@@ -26,6 +26,7 @@ dependencies:
   flutter_midi_command: ^0.2.6
   flutter_midi_synthesizer:
     path: ../flutter_midi_synthesizer/
+  screen: ^0.0.5
   tonic: ^0.2.3
   tuple: ^1.0.3
 
@@ -48,9 +49,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  assets:
-    - assets/sounds/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

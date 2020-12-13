@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:aurora/devices/Color.dart';
+import 'package:aurora/devices/Pos.dart';
 import 'package:flutter_midi_command/flutter_midi_command.dart';
 
 class Launchpad {
@@ -17,20 +19,19 @@ class Launchpad {
     _writeSysEx([0, 32, 41, 2, 14, 14, mode.clamp(0, 1)]);
   }
 
-  setCellRgb(int x, int y, int red, int green, int blue) {
-    final r = red.clamp(0, 63);
-    final g = green.clamp(0, 63);
-    final b = blue.clamp(0, 63);
-    final number = _translate(x, y);
-    _writeSysEx([0, 32, 41, 2, 14, 3, 3, number, r, g, b]);
+  setCellRgb(Pos pos, Color color) {
+    _writeSysEx([0, 32, 41, 2, 14, 3, 3, pos.number] + color.bytes());
   }
 
-  setCellCode(int x, int y, int code) {
-    final number = _translate(x, y);
-    _write([144, number, code]);
+  setCellPalette(Pos pos, int color) {
+    _write([144, pos.number, color]);
   }
 
-  int _translate(int x, int y) {
-    return (10 * y + x).clamp(0, 127);
+  flashCellPalette(Pos pos, int color) {
+    _write([145, pos.number, color]);
+  }
+
+  pulseCellPalette(Pos pos, int color) {
+    _write([146, pos.number, color]);
   }
 }

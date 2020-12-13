@@ -1,32 +1,21 @@
 import 'dart:math';
 
 import 'package:aurora/devices/Launchpad.dart';
+import 'package:aurora/devices/Pos.dart';
 import 'package:aurora/effects/Effect.dart';
 
-const frameDuration = Duration(milliseconds: 100);
+const frameDuration = Duration(hours: 1);
 
 class Heart extends Effect {
-  final List<List<List<int>>> heart = [
-    [
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 1, 1, 0, 1, 1, 0],
-      [0, 1, 1, 1, 1, 1, 1, 1],
-      [0, 1, 1, 1, 1, 1, 1, 1],
-      [0, 0, 1, 1, 1, 1, 1, 0],
-      [0, 0, 0, 1, 1, 1, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-    ],
-    [
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 1, 1, 0, 1, 1, 0],
-      [0, 1, 1, 1, 1, 1, 1, 1],
-      [0, 1, 1, 1, 1, 1, 1, 1],
-      [0, 1, 1, 1, 1, 1, 1, 1],
-      [0, 0, 1, 1, 1, 1, 1, 0],
-      [0, 0, 0, 1, 1, 1, 0, 0],
-      [0, 0, 0, 0, 1, 0, 0, 0],
-    ],
+  final List<List<int>> heart = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
   ];
   Duration nextFrame = Duration.zero;
 
@@ -40,16 +29,17 @@ class Heart extends Effect {
   @override
   onUpdate(Duration elapsed) {
     if (elapsed > nextFrame) {
-      _fill(elapsed.inMilliseconds);
+      _fill();
       nextFrame += frameDuration;
     }
   }
 
-  _fill(int ms) {
+  _fill() {
     for (int y = 0; y < 8; y++) {
       for (int x = 0; x < 8; x++) {
-        final int red = (max(heart[0][y][x].toDouble(), heart[1][y][x] * sin(ms / 4)) * 63).toInt();
-        launchpad.setCellRgb(x + 1, y + 1, red, 0, 0);
+        if (heart[y][x] > 0) {
+          launchpad.pulseCellPalette(Pos.from(x + 1, y + 1), 5);
+        }
       }
     }
   }

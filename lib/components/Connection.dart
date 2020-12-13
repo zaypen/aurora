@@ -84,8 +84,9 @@ class _ConnectionState extends State<Connection> {
   }
 
   Widget buildEmptyTile() {
-    return ListTile(
-      title: Text(
+    return Container(
+      padding: const EdgeInsets.all(12),
+      child: Text(
         'No device found.',
         style: Theme.of(context).textTheme.subtitle1,
         textAlign: TextAlign.center,

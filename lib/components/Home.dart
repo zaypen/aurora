@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:aurora/components/Effects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_midi_command/flutter_midi_command.dart';
+import 'package:flutter_midi_synthesizer/flutter_midi_synthesizer.dart';
+import 'package:screen/screen.dart';
 import 'package:tuple/tuple.dart';
 
 import 'Games.dart';
@@ -19,6 +21,20 @@ class _HomeState extends State<Home> {
   Future<bool> _onClose() {
     MidiCommand().teardown();
     return Future.value(true);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    MidiSynthesizer.start();
+    Screen.keepOn(true);
+  }
+
+  @override
+  void dispose() {
+    Screen.keepOn(false);
+    MidiSynthesizer.stop();
+    super.dispose();
   }
 
   @override

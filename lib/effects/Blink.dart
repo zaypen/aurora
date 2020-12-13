@@ -1,5 +1,6 @@
 import 'package:aurora/devices/Launchpad.dart';
 import 'package:aurora/devices/Palette.dart';
+import 'package:aurora/devices/Pos.dart';
 import 'package:aurora/effects/Effect.dart';
 
 const frameDuration = Duration(seconds: 1);
@@ -29,7 +30,7 @@ class Blink extends Effect {
   _fill(int color) {
     for (int y = 1; y < 9; y++) {
       for (int x = 1; x < 9; x++) {
-        launchpad.setCellCode(x, y, color);
+        launchpad.setCellPalette(Pos.from(x, y), color);
       }
     }
   }
