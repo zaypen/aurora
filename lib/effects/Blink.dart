@@ -19,19 +19,20 @@ class Blink extends Effect {
   @override
   onUpdate(Duration elapsed) {
     if (elapsed > nextFrame) {
-      color = color == Palette.BLACK
-          ? Palette.WHITE
-          : Palette.BLACK;
+      color = color == Palette.BLACK ? Palette.WHITE : Palette.BLACK;
       _fill(color);
-      nextFrame += frameDuration;
+      while (nextFrame < elapsed) {
+        nextFrame += frameDuration;
+      }
     }
   }
 
   _fill(int color) {
-    for (int y = 1; y < 9; y++) {
-      for (int x = 1; x < 9; x++) {
-        launchpad.setCellPalette(Point(x, y), color);
-      }
-    }
+    final indices = List.generate(8, (index) => 1 + index).expand(
+        (row) => List.generate(8, (index) => Point(1 + index, row).toNumber()));
+    final data = indices
+        .expand((number) => [Launchpad.LIGHTING_TYPE_STATIC, number, color])
+        .toList();
+    launchpad.setCellBatch(data);
   }
 }

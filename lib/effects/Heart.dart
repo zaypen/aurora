@@ -35,12 +35,13 @@ class Heart extends Effect {
   }
 
   _fill() {
-    for (int y = 0; y < 8; y++) {
-      for (int x = 0; x < 8; x++) {
-        if (heart[y][x] > 0) {
-          launchpad.pulseCellPalette(Point(x + 1, y + 1), 5);
-        }
-      }
-    }
+    final data = List.generate(8, (index) => index)
+        .expand((row) => List.generate(8, (index) => index).expand((col) => [
+              Launchpad.LIGHTING_TYPE_PULSING,
+              Point(8 - col, 8 - row).toNumber(),
+              heart[row][col] > 0 ? 5 : 3
+            ]))
+        .toList();
+    launchpad.setCellBatch(data);
   }
 }
