@@ -1,7 +1,7 @@
+import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:aurora/devices/Color.dart';
-import 'package:aurora/devices/Pos.dart';
+import 'package:aurora/extensions/launchpad_point.dart';
 import 'package:flutter_midi_command/flutter_midi_command.dart';
 
 class Launchpad {
@@ -28,10 +28,6 @@ class Launchpad {
 
   setProgrammerMode(int mode) {
     writeSysEx(SYS_EX_HEADER + [14, 14, mode.clamp(0, 1)]);
-  }
-
-  setCellRgb(Point point, Color color) {
-    writeSysEx(SYS_EX_HEADER + [14, 3, 3, point.toNumber()] + color.bytes());
   }
 
   setCellPalette(Point point, int color) {

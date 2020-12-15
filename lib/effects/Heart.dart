@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:aurora/devices/Launchpad.dart';
-import 'package:aurora/devices/Pos.dart';
 import 'package:aurora/effects/Effect.dart';
+import 'package:aurora/extensions/launchpad_point.dart';
 
 const frameDuration = Duration(hours: 1);
 

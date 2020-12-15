@@ -30,6 +30,7 @@ class _EffectPlayerState extends State<EffectPlayer>
 
   @override
   void dispose() {
+    widget._effect.onExit();
     _ticker.stop();
     _ticker.dispose();
     super.dispose();

@@ -1,5 +1,6 @@
 import 'package:aurora/components/EffectPlayer.dart';
 import 'package:aurora/devices/Launchpad.dart';
+import 'package:aurora/effects/Aurora.dart';
 import 'package:aurora/effects/Blink.dart';
 import 'package:aurora/effects/Heart.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:tuple/tuple.dart';
 class Effects extends StatelessWidget {
   final Launchpad _launchpad = Launchpad();
   final List<Tuple2<String, Function>> _effects = [
+    Tuple2('Aurora', (l) => Aurora(l)),
     Tuple2('Blink', (l) => Blink(l)),
     Tuple2('Heart', (l) => Heart(l)),
   ];
