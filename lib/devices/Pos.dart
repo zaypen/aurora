@@ -1,13 +1,17 @@
-class Pos {
+class Point {
   static const int NUMBER_MIN = 0;
-  static const int NUMBER_MAX = 127;
-  static const int NUMBER_PER_LINE = 10;
+  static const int NUMBER_MAX = 109;
+  static const int X_MIN = 0;
+  static const int X_MAX = 10;
+  static const int Y_MIN = 0;
+  static const int Y_MAX = 11;
 
-  final int number;
+  final int x;
+  final int y;
 
-  Pos(int number) : this.number = number.clamp(NUMBER_MIN, NUMBER_MAX);
+  Point(this.x, this.y);
 
-  factory Pos.from(int x, int y) {
-    return Pos(y * NUMBER_PER_LINE + x);
+  int toNumber() {
+    return (y * X_MAX + x).clamp(NUMBER_MIN, NUMBER_MAX);
   }
 }

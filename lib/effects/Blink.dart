@@ -30,7 +30,7 @@ class Blink extends Effect {
   _fill(int color) {
     for (int y = 1; y < 9; y++) {
       for (int x = 1; x < 9; x++) {
-        launchpad.setCellPalette(Pos.from(x, y), color);
+        launchpad.setCellPalette(Point(x, y), color);
       }
     }
   }

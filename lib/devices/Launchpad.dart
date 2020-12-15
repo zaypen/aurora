@@ -26,19 +26,19 @@ class Launchpad {
     _writeSysEx(SYS_EX_HEADER + [14, 14, mode.clamp(0, 1)]);
   }
 
-  setCellRgb(Pos pos, Color color) {
-    _writeSysEx(SYS_EX_HEADER + [14, 3, 3, pos.number] + color.bytes());
+  setCellRgb(Point point, Color color) {
+    _writeSysEx(SYS_EX_HEADER + [14, 3, 3, point.toNumber()] + color.bytes());
   }
 
-  setCellPalette(Pos pos, int color) {
-    _write([144, pos.number, color]);
+  setCellPalette(Point point, int color) {
+    _write([144, point.toNumber(), color]);
   }
 
-  flashCellPalette(Pos pos, int color) {
-    _write([145, pos.number, color]);
+  flashCellPalette(Point point, int color) {
+    _write([145, point.toNumber(), color]);
   }
 
-  pulseCellPalette(Pos pos, int color) {
-    _write([146, pos.number, color]);
+  pulseCellPalette(Point point, int color) {
+    _write([146, point.toNumber(), color]);
   }
 }

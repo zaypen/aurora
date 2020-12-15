@@ -38,7 +38,7 @@ class Heart extends Effect {
     for (int y = 0; y < 8; y++) {
       for (int x = 0; x < 8; x++) {
         if (heart[y][x] > 0) {
-          launchpad.pulseCellPalette(Pos.from(x + 1, y + 1), 5);
+          launchpad.pulseCellPalette(Point(x + 1, y + 1), 5);
         }
       }
     }
