@@ -42,14 +42,18 @@ class _EffectPlayerState extends State<EffectPlayer>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: RaisedButton(
-                child: const Text('Stop'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+            Expanded(
+              flex: 2,
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            Expanded(
+              child: Center(
+                child: RaisedButton(
+                  child: const Text('Stop'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
           ],
